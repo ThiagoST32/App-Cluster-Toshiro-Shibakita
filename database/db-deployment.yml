@@ -1,0 +1,32 @@
+appVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-app5
+spec:
+  selector:
+    matchLabels:
+      app: mysql-app5
+  template:
+    metadata:
+      labels:
+        app: mysql-app5
+    spec:
+      containers:
+        - name: mysql-app5
+          image: thiagost32/mysql-app-5:1.0
+          imagePullPolicy: always
+          ports: 3306
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-connection
+spec:
+  ports:
+    - ports: 3306
+  selector:
+    app: mysql-app5
+  clusterIp: None
